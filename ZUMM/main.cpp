@@ -314,7 +314,7 @@ void print_screen(void)
     gotoxy(xmax+3,0);
     cout << "Tvoja energija je: " << igrac_x.energija << endl;
     gotoxy(xmax+3, 1);
-    cout << "Protivnikova energija je: " << igrac_o.energija_kretanja<<" " << endl;
+    cout << "Protivnikova energija je: " << igrac_o.energija<<" " << endl;
     gotoxy(xmax+3, 2);
     cout << "Score: " << igrac_x.poeni << endl;
     if (igrac_x.pozicija_metka[0] <= xmax && igrac_x.pozicija_metka[1] <= ymax && igrac_x.pozicija_metka[0]>=0 && igrac_x.pozicija_metka[1]>=0)

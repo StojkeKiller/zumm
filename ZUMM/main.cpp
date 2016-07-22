@@ -5,6 +5,8 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <time.h>
+#include <main.h>
+#include <Metak.h>
 
 using namespace std;
 
@@ -17,8 +19,7 @@ const int pocetna_energija = 200;
 //const int kretanje = -5;
 const int maks_broj_reaktora = 400;
 const int maks_broj_medica = 400;
-const int xmax = 20;
-const int ymax = 20;
+
 int pos_reaktor[maks_broj_reaktora * 2] = {1, 4};
 int pos_medic[maks_broj_medica * 2] = {4, 1};
 //int pos[2] = {0,0};
@@ -330,7 +331,7 @@ void print_screen(void)
 int igrica (int komanda)
 {
     static int usporenje = 0;
-    static int ukupno_usporenje = 120;
+    static int ukupno_usporenje = 200;
     static int metak_ispaljen_desno = 0;
     static int metak_ispaljen_levo = 0;
     static int metak_ispaljen_dole = 0;
@@ -520,7 +521,7 @@ int igrica (int komanda)
         igrac_x.pozicija[1] = ymax;
         print_screen();
     }
-    if (igrac_o.pozicija_metka[0] == igrac_o.pozicija[0] && igrac_o.pozicija_metka[1] == igrac_o.pozicija[1])
+    if (igrac_x.pozicija_metka[0] == igrac_o.pozicija[0] && igrac_x.pozicija_metka[1] == igrac_o.pozicija[1])
     {
         usporenje = -20;
         igrac_o.energija=igrac_o.energija-10;
@@ -639,8 +640,8 @@ int main (int argc, char *argv[])
         {
             if(igrac_x.pozicija[0]>0)
             {
-                igrac_x.pozicija_metka[0] = igrac_x.pozicija_metka[0] - 1;
-                igrac_x.pozicija_metka[1] = igrac_x.pozicija_metka[1];
+                igrac_x.pozicija_metka[0] = igrac_x.pozicija[0] - 1;
+                igrac_x.pozicija_metka[1] = igrac_x.pozicija[1];
                 stanje = igrica(pucanj_levo);
             }
         }
@@ -648,15 +649,15 @@ int main (int argc, char *argv[])
         {
             if(igrac_x.pozicija[1]>0)
             {
-                igrac_x.pozicija_metka[0] = igrac_x.pozicija_metka[0];
-                igrac_x.pozicija_metka[1] = igrac_x.pozicija_metka[1]+1;
+                igrac_x.pozicija_metka[0] = igrac_x.pozicija[0];
+                igrac_x.pozicija_metka[1] = igrac_x.pozicija[1]+1;
                 stanje = igrica(pucanj_gore);
             }
         }
         else if(c=='k')
         {
-            igrac_x.pozicija_metka[0] =igrac_x.pozicija_metka[0];
-            igrac_x.pozicija_metka[1]= igrac_x.pozicija_metka[1] - 1;
+            igrac_x.pozicija_metka[0] =igrac_x.pozicija[0];
+            igrac_x.pozicija_metka[1]= igrac_x.pozicija[1] - 1;
             stanje = igrica(pucanj_dole);
         }
         else

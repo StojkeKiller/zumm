@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1468506636 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
+1469208194 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -7,4 +7,10 @@
 	<pthread.h>
 	<stdlib.h>
 	<time.h>
+	<main.h>
+	<Metak.h>
+
+1469208107 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\main.h
+
+1469207944 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\metak.h
 

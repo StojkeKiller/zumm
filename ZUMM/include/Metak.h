@@ -6,11 +6,13 @@ class Metak
 {
     public:
         Metak();
-        kretanje();
+        void kretanje();
+        bool u_kretanju;
         int pozicija_x;
         int pozicija_y;
+        int smer;
         int razorna_moc;
-        void ispali(int);
+        void ispali(int,int,int);
         virtual ~Metak();
 
     protected:

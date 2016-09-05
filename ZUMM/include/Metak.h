@@ -8,6 +8,7 @@ class Metak
         Metak();
         void kretanje();
         bool u_kretanju;
+        void zvuk_metka();
         int pozicija_x;
         int pozicija_y;
         int smer;

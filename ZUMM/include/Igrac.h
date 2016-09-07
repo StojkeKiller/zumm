@@ -11,14 +11,19 @@ class Igrac
         char izgled;
         int tip;
         void kretanje_igraca(int);
+        int target_x;
+        int target_y;
         int energija;
         int poeni;
         int energija_kretanja;
+        int ukupno_usporenje;
+        int usporenje;
         virtual ~Igrac();
 
     protected:
 
     private:
+        void kretanje_ai(void);
 };
 
 #endif // IGRAC_H

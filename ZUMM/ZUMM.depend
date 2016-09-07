@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1473099448 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
+1473271543 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -20,9 +20,9 @@
 	<main.h>
 	<windows.h>
 
-1473099494 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\igrac.h
+1473271211 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\igrac.h
 
-1473097670 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\src\igrac.cpp
+1473272118 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\src\igrac.cpp
 	"Igrac.h"
 	"main.h"
 

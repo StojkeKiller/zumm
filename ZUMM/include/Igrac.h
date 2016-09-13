@@ -16,7 +16,7 @@ class Igrac
         int energija;
         int poeni;
         int energija_kretanja;
-        int ukupno_usporenje;
+        int usporenje_brojac;
         int usporenje;
         virtual ~Igrac();
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1473271543 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
+1473797982 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -10,6 +10,7 @@
 	<main.h>
 	<Metak.h>
 	<Igrac.h>
+	<Artifakt.h>
 
 1473098571 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\main.h
 
@@ -20,9 +21,14 @@
 	<main.h>
 	<windows.h>
 
-1473271211 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\igrac.h
+1473793641 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\igrac.h
 
-1473272118 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\src\igrac.cpp
+1473795102 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\src\igrac.cpp
 	"Igrac.h"
 	"main.h"
+
+1473795744 c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\include\artifakt.h
+
+1473795541 source:c:\users\zoran stojicevic\desktop\c++\zumm\zumm\zumm\src\artifakt.cpp
+	"Artifakt.h"
 

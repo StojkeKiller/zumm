@@ -8,32 +8,24 @@
 #include <main.h>
 #include <Metak.h>
 #include <Igrac.h>
+#include <Artifakt.h>
 
 using namespace std;
 
 
 enum result {res_reaktor, res_medic, res_normal};
 enum oruzje{nijedno,pistolj,laser,bazuka};
-const int reaktor = -20;
-const int medic = 30;
 const int pocetna_energija = 200;
-//const int kretanje = -5;
-const int maks_broj_reaktora = 400;
+const int maks_broj_reaktor = 400;
 const int maks_broj_medica = 400;
 Metak metak_objekat;
 Igrac igrac_objekat_x;
 Igrac igrac_objekat_o;
-int pos_reaktor[maks_broj_reaktora * 2] = {1, 4};
-int pos_medic[maks_broj_medica * 2] = {4, 1};
-//int pos[2] = {0,0};
-//int pos_m[2] = {xmax + 1, dddymax + 1};
-//int energija = 100000;
-//int energija2 = 100;
-//int score = 0;
+Artifakt reaktor_objekat[maks_broj_reaktor * 2];
+Artifakt medic_objekat[maks_broj_medica * 2];
 
 int brojac_medic = 1;
 int brojac_reaktor = 1;
-//int pos_o[2] = {0,0};
 int krajigre_promenljiva = 0;
 int level=1;
 char matrix[xmax+2][ymax+2];
@@ -298,13 +290,13 @@ void print_screen(void)
     print_border();
     for (int i = 0; i < brojac_reaktor; i++)
     {
-        //gotoxy (pos_reaktor[i], pos_reaktor[i + 1]);
-        matrix[pos_reaktor[i]][pos_reaktor[i+1]]='!';
+        //gotoxy (reaktor_objekat.energija_objekat[i].pozicicija_x, reaktor_objekat.energija_objekat[i].pozicija+y);
+        matrix[reaktor_objekat[i].pozicija_x][reaktor_objekat[i].pozicija_y]='!';
     }
     for (int i = 0; i < brojac_medic; i++)
     {
-        //gotoxy (pos_medic[i], pos_medic[i + 1]);
-        matrix[pos_medic[i]][pos_medic[i+1]]='+';
+        //gotoxy (medic_objekat[i].pozicija_x, pos_medic[i + 1]);
+        matrix[medic_objekat[i].pozicija_x][medic_objekat[i].pozicija_y]='+';
     }
     //gotoxy(pos[0], pos[1]);
     matrix[igrac_objekat_x.pozicija_x][igrac_objekat_x.pozicija_y]='X';
@@ -332,25 +324,25 @@ void print_screen(void)
 }
 int igrica (int komanda)
 {
+
     igrac_objekat_x.kretanje_igraca(komanda);
-    igrac_objekat_o.target_x = igrac_objekat_x.pozicija_x;
-    igrac_objekat_o.target_y = igrac_objekat_x.pozicija_y;
+    igrac_objekat_o.target_x=igrac_objekat_x.pozicija_x;
+    igrac_objekat_o.target_y=igrac_objekat_x.pozicija_y;
     igrac_objekat_o.kretanje_igraca(nista);
-    if(komanda == pucanj_desno || komanda == pucanj_levo || komanda == pucanj_dole || komanda == pucanj_gore)
+    if(komanda==pucanj_desno || komanda==pucanj_dole || komanda==pucanj_gore || komanda==pucanj_levo)
     {
         metak_objekat.ispali(igrac_objekat_x.pozicija_x,igrac_objekat_x.pozicija_y,komanda);
     }
     metak_objekat.kretanje();
-
     for (int i = 0; i < brojac_reaktor; i++)
     {
-        if ((igrac_objekat_x.pozicija_x == pos_reaktor[i]) && (igrac_objekat_x.pozicija_y == pos_reaktor[i + 1]))
+        if ((igrac_objekat_x.pozicija_x == reaktor_objekat[i].pozicija_x) && (igrac_objekat_x.pozicija_y == reaktor_objekat[i].pozicija_y))
         {
-            igrac_objekat_x.energija = igrac_objekat_x.energija + reaktor;
+            igrac_objekat_x.energija = igrac_objekat_x.energija + reaktor_objekat[i].energija;
             for (int j = 0; j < brojac_reaktor; j++)
             {
-                pos_reaktor[j] = rand() % xmax + 1;
-                pos_reaktor[j + 1] = rand() % ymax + 1;
+                reaktor_objekat[j].pozicija_x = rand() % xmax + 1;
+                reaktor_objekat[j].pozicija_y = rand() % ymax + 1;
             }
             brojac_reaktor++;
             return res_reaktor;
@@ -358,13 +350,13 @@ int igrica (int komanda)
     }
     for (int i = 0; i < brojac_reaktor; i++)
     {
-        if ((igrac_objekat_o.pozicija_x == pos_reaktor[i]) && (igrac_objekat_o.pozicija_y == pos_reaktor[i + 1]))
+        if ((igrac_objekat_o.pozicija_x == reaktor_objekat[i].pozicija_x) && (igrac_objekat_o.pozicija_y == reaktor_objekat[i].pozicija_y))
         {
-            igrac_objekat_o.energija = igrac_objekat_o.energija + reaktor;
+            igrac_objekat_o.energija = igrac_objekat_o.energija + reaktor_objekat[i].energija;
             for (int j = 0; j < brojac_reaktor; j++)
             {
-                pos_reaktor[j] = rand() % xmax + 1;
-                pos_reaktor[j + 1] = rand() % ymax + 1;
+                reaktor_objekat[j].pozicija_x = rand() % xmax + 1;
+                reaktor_objekat[j].pozicija_y = rand() % ymax + 1;
             }
             brojac_reaktor++;
             return res_reaktor;
@@ -372,13 +364,13 @@ int igrica (int komanda)
     }
     for (int i = 0; i < brojac_medic; i++)
     {
-        if ((igrac_objekat_x.pozicija_x == pos_medic[i]) && (igrac_objekat_x.pozicija_y == pos_medic[i + 1]))
+        if ((igrac_objekat_x.pozicija_x == medic_objekat[i].pozicija_x) && (igrac_objekat_x.pozicija_y == medic_objekat[i].pozicija_y))
         {
-            igrac_objekat_x.energija = igrac_objekat_x.energija + medic;
+            igrac_objekat_x.energija = igrac_objekat_x.energija + medic_objekat[i].energija;
             for (int j = 0; j < brojac_medic; j++)
             {
-                pos_medic[j] = rand() % xmax + 1;
-                pos_medic[j + 1] = rand() % ymax + 1;
+                medic_objekat[j].pozicija_x = rand() % xmax + 1;
+                medic_objekat[j].pozicija_y = rand() % ymax + 1;
             }
             brojac_medic++;
             return res_medic;
@@ -386,13 +378,13 @@ int igrica (int komanda)
     }
     for (int i = 0; i < brojac_medic; i++)
     {
-        if ((igrac_objekat_o.pozicija_x == pos_medic[i]) && (igrac_objekat_o.pozicija_y == pos_medic[i + 1]))
+        if ((igrac_objekat_o.pozicija_x == medic_objekat[i].pozicija_x) && (igrac_objekat_o.pozicija_y == medic_objekat[i].pozicija_y))
         {
-            igrac_objekat_o.energija = igrac_objekat_o.energija + medic;
+            igrac_objekat_o.energija = igrac_objekat_o.energija + medic_objekat[i].energija;
             for (int j = 0; j < brojac_medic; j++)
             {
-                pos_medic[j] = rand() % xmax + 1;
-                pos_medic[j + 1] = rand() % ymax + 1;
+                medic_objekat[j].pozicija_x = rand() % xmax + 1;
+                medic_objekat[j].pozicija_y = rand() % ymax + 1;
             }
             brojac_medic++;
             return res_medic;
@@ -403,22 +395,21 @@ int igrica (int komanda)
         igrac_objekat_x.poeni=igrac_objekat_x.poeni+50;
         igrac_objekat_o.energija=100;
         level++;
-        igrac_objekat_o.ukupno_usporenje=igrac_objekat_o.ukupno_usporenje-10;
         igrac_objekat_o.pozicija_x = rand() % xmax + 1;
         igrac_objekat_o.pozicija_y = rand() % ymax + 1;
     }
 
     if (metak_objekat.pozicija_x == igrac_objekat_o.pozicija_x && metak_objekat.pozicija_y == igrac_objekat_o.pozicija_y)
     {
-        igrac_objekat_o.energija = igrac_objekat_o.energija - 10;
-        igrac_objekat_o.usporenje -= 20;
-        metak_objekat.u_kretanju = false;
+        metak_objekat.u_kretanju=false;
+        igrac_objekat_o.energija=igrac_objekat_o.energija-10;
         igrac_objekat_x.poeni = igrac_objekat_x.poeni + 10;
     }
     if (igrac_objekat_x.pozicija_x == igrac_objekat_o.pozicija_x && igrac_objekat_x.pozicija_y == igrac_objekat_o.pozicija_y)
     {
         gameover();
     }
+    print_screen();
     return res_normal;
 }
 int main (int argc, char *argv[])
@@ -434,10 +425,25 @@ int main (int argc, char *argv[])
     srand(time(NULL));
     igrac_objekat_o.pozicija_x = rand() % xmax + 1;
     igrac_objekat_o.pozicija_y = rand() % ymax + 1;
-    pos_reaktor[0] = rand() % xmax + 1;
-    pos_reaktor[1] = rand() % ymax + 1;
-    pos_medic[0] = rand() % xmax + 1;
-    pos_medic[1] = rand() % ymax + 1;
+    for(int i =0;i <maks_broj_reaktor;i++)
+    {
+        reaktor_objekat[i].izgled = '!';
+        medic_objekat[i].energija =-10;
+    }
+    for(int i =0;i <maks_broj_medica;i++)
+    {
+        medic_objekat[i].izgled= '+';
+        medic_objekat[i].energija = 20;
+    }
+    reaktor_objekat[0].pozicija_x =  rand() % xmax + 1;
+    reaktor_objekat[0].pozicija_y =  rand() % ymax + 1;
+    medic_objekat[0].pozicija_x =  rand() % xmax + 1;
+    medic_objekat[0].pozicija_y =  rand() % ymax + 1;
+
+    reaktor_objekat[0].pozicija_x = rand() % xmax + 1;
+    reaktor_objekat[1].pozicija_x = rand() % ymax + 1;
+    medic_objekat[0].pozicija_x = rand() % xmax + 1;
+    medic_objekat[0].pozicija_x = rand() % ymax + 1;
     //pos_o[0] = rand() % xmax + 1;
     //pos_o[1] = rand() % ymax + 1;
     pthread_t threads;

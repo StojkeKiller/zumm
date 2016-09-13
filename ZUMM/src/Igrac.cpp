@@ -3,8 +3,8 @@
 
 Igrac::Igrac()
 {
-    int usporenje = 0;
-    int ukupno_usporenje = 200;
+    usporenje_brojac = 1;
+    usporenje = 200;
     poeni = 0;
     energija_kretanja=-5;
     pozicija_x =0;
@@ -13,54 +13,49 @@ Igrac::Igrac()
 }
 void Igrac :: kretanje_ai(void)
 {
+
         if (target_x != pozicija_x)
         {
-            usporenje++;
-            if (usporenje >= ukupno_usporenje)
-            {
-                if (target_x < pozicija_x)
+            if (target_x < pozicija_x)
                 {
                     pozicija_x--;
-                    usporenje = 0;
+
                 }
                 else if (target_x> pozicija_x)
                 {
                     pozicija_x++;
-                    usporenje = 0;
-                }
-            }
 
+                }
         }
         if (target_y != pozicija_y)
         {
-            usporenje++;
-            if (usporenje >= ukupno_usporenje)
-            {
                 if (target_y < pozicija_y)
                 {
                     pozicija_y--;
-                    usporenje = 0;
+
                 }
                 else if (target_y > pozicija_y)
                 {
                     pozicija_y++;
-                    usporenje = 0;
+
                 }
             }
-
-        }
-
-
-
 
 }
 void Igrac::kretanje_igraca(int komanda)
 {
+
     if(tip == ai)
     {
+        usporenje_brojac++;
+    }
+    if(tip == ai && usporenje_brojac==usporenje)
+    {
+        usporenje_brojac=0;
         kretanje_ai();
         return;
     }
+
     if(komanda == desno)
     {
         pozicija_x++;
